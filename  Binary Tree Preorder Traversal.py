@@ -6,7 +6,7 @@ class TreeNode:
         self.left, self.right = None, None
 """
 
-
+# recursive
 class Solution:
     """
     @param root: The root of binary tree.
@@ -23,3 +23,28 @@ class Solution:
         result = []
         self.traversal(root, result)
         return result
+
+
+# non-recursive
+
+class Solution:
+
+    def preorderTraversal(self, root):
+
+        if root is None:
+            return []
+
+        stack = [root]
+        result = []
+
+        while stack:
+            root = stack.pop()
+            result.append(root.val)
+            while root.left:
+                stack.append(root.left)
+                result.append(root.val)
+            while root.right:
+                stack.append(root.right)
+                result.append(root.val)
+        return result
+
