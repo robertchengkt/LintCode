@@ -49,6 +49,7 @@ public class Solution {
             postnNode = temp;
         }
         mNode.next = postnNode;
-        return premNode.next;
+        premNode.next = nNode;
+        return dummy.next;
     }
 }
