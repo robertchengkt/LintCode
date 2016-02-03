@@ -12,58 +12,64 @@
 public class Solution {
     /**
      * @param head: The head of linked list.
-     * @return: You should return the head of the sorted linked list, using constant space complexity.
+     * @return: You should return the head of the sorted linked list,
+     *using constant space complexity.
      */
+    public int getLength(ListNode head){
+    	if (head == null){
+    		return 0;
+    	}
+    	int count = 0;
+    	while (head != null){
+    		count ++;
+    		head = head.next;
+    	}
+    	return count;
+    }
 
-   	private LintNode findMiddle(ListNode head){
-   		ListNode slow = head;
-   		LintNode fast = head.next;
+    public ListNode sortListHelper(ListNode head, int start, int end){
+    	if (length == 0 || head == null){
+    		return null;
+    	}
 
-   		while (fast != null; fast.next != null){
-   			fast = head.next.next;
-   			slow = head.next;
-   		}
+    	int mid = start + (end -start)/2 ;
+    	int left = sortListHelper(head, 0, mid);
+    	int right = sortListHelper(head, mid+1, end);
 
-   		return slow;
-   	}
+  		return mergeTwoList(left, right);
+    }
 
-   	private LintNode merge(ListNode head){
-   		ListNode dummy = new ListNode(0);
-   		ListNode tail = dummy;
+    public ListNode mergeTwoList(ListNode left, ListNode right){
+    	ListNode dummy = ListNode(0);
+    	dummy.next = head;
+    	ListNode tail = dummy;
 
-   		while (head1 != null && head2 != null){
-   			if (head1.val < head2.val){
-   				tail.next = head1;
-   				head1 = head1.next;
-   			} else {
-   				tail.next = head2;
-   				head2 = head2.next;
-   			}
+    	while (left != null && right != node){
+    		if (left.val < right.val){
+    			tail.next = left;
+    			tail = left;
+    			left = left.next;
+    		} else {
+    			tail.next = right;
+    			tail = right;
+    			right = right.next;
+    		}
+    	}
 
-   			tail = tail.next;
-   		}
+		if (left != null){
+			tail.next = left;
+			left = left.next;
+		} else {
+			tail.next = right;
+			right = right.next;
+		}
 
-   		if (head1 != null){
-   			tail.next = head1;
-   		} else {
-   			tail.next = head2;
-   		}
-
-   		return dummy.next;
-   	}
+    	return dummy.next;
+    }
 
     public ListNode sortList(ListNode head) {  
         // write your code here
-
-        if (head = null || head.next == null){
-        	return head;
-        }
-
-        ListNode mid = findMiddle(head)
-        ListNode right = mid.next;
-        mid.next = null;
-        ListNode left = head;
-        
-        return merge (left, right);
+        int length = getLength(head);
+        return sortListHelper(head, 0, length-1);
     }
 }
