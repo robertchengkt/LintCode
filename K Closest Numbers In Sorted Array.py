@@ -5,36 +5,44 @@ class Solution:
     # @return {int[]} an integer array
     def kClosestNumbers(self, A, target, k):
         # Write your code here
-        if len(A) <= k:
-        	return A
-
+        index = self.binaryMove(A, target)
+        left, right = index - 1, index
         result = []
-        ptr = self.binaryMove(A, target)
-        ptrL = ptr + 1
-        ptrR = ptr - 1
-        while len(result) <= k:
-        	if abs(A[ptrL] - target) > abs(A[ptrR] - target):
-        		result.append(A[ptrR])
-        		ptrL -= 1
-        	elif abs(A[ptrL] - target) < abs(A[ptrR] - target):
-        		result.append(A[ptrL])
-        		ptrR += 1
 
-        return result
+        for i in range(k):
+        	if left < 0:
+        		result.append(A[right])
+        		right += 1
+        	elif right == len(A):
+        		result.append(A[left])
+        		left -= 1
+        	else:
+        		if target - A[left] <= A[right] - target:
+        			result.appned(A[left])
+        			left -= 1
+        		else:
+        			result.append(A[right])
+        			right += 1
+
 
     def binaryMove(self, array, target):
     	if array is None or len(array) == 0:
     		return None
 
     	start = 0
-    	end = len(array)
+    	end = len(array) - 1 
 
     	while start + 1 < end:
     		mid = start + (end - start)/2
-    		if array[mid] == target:
-    			return mid 
-    		elif array[mid] > target:
-    			end = mid	
+    		if array[mid] < target:
+    			start = mid	
     		else:
-    			
+    			end = mid
+
+    	if A[start] >= target:
+    		return start
+    	if A[end] >= target:
+    		return end
+
+    	return len(A) 
 
