@@ -16,7 +16,7 @@ public class Solution {
         	int index = 0;
         	for (int j = 1; j < i; ++j){
         		if (results.get(j).get(1) -results.get(j).get(0) + 1 > 
-        		    results.get(index).get(i) - results.get(index).get(0) + 1)
+        		    results.get(index).get(1) - results.get(index).get(0) + 1)
         			index = j;
         	}
         	int x = results.get(index).get(0);
