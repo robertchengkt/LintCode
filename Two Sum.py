@@ -7,12 +7,20 @@ class Solution:
     def twoSum(self, numbers, target):
         # write your code here
         result = []
-        numbers = sort(numbers)
-        if len(number) < 2 or number is None:
+        tmp = []
+        sorted_nums = sorted(numbers)
+        if len(numbers) < 2 or numbers is None:
         	return result
         ptLeft = 0
-        ptRight = len(numbers)
+        ptRight = len(sorted_nums) - 1
         while ptLeft < ptRight:
-        	if numbers[ptLeft] + numbers[ptRight] == target:
-        		result.append(numbers[ptLeft], numbers[ptRight])
+        	if sorted_nums[ptLeft] + sorted_nums[ptRight] == target:
+        		tmp.append(sorted_nums[ptLeft + 1])
+        		tmp.append(sorted_nums[ptRight + 1])
+        		for i in tmp:
+        			result.append(numbers.index(i))
         		return result
+        	elif numbers[ptLeft] + numbers[ptRight] < target:
+        	    ptLeft += 1
+        	else:
+        	    ptRight -= 1
